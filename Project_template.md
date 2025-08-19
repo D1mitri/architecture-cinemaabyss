@@ -113,7 +113,6 @@ jobs:
 Как только сборка отработает и в github registry появятся ваши образы, можно переходить к блоку настройки Kubernetes
 Успешным результатом данного шага является "зеленая" сборка и "зеленые" тесты
 
-
 ### Proxy в Kubernetes
 
 #### Шаг 1
@@ -279,6 +278,9 @@ postgres-0   1/1     Running
 #### Шаг 3
 Добавьте сюда скриншота вывода при вызове https://cinemaabyss.example.com/api/movies и  скриншот вывода event-service после вызова тестов.
 
+[Скриншот при вызове https://cinemaabyss.example.com/api/movies](https://disk.yandex.ru/i/opChnQPHMNC0Xg)
+
+[Скриншот вывода event-service после вызова тестов](https://disk.yandex.ru/i/AXu5BOCtfSkkHQ)
 
 # Задание 4
 Для простоты дальнейшего обновления и развертывания вам как архитектуру необходимо так же реализовать helm-чарты для прокси-сервиса и проверить работу
