@@ -23,14 +23,28 @@ MIGRATION_PERCENT = int(os.getenv('MOVIES_MIGRATION_PERCENT', 50))
 class ProxyHandler(BaseHTTPRequestHandler):
     def _get_target_url(self, path):
         """Определяем целевой URL на основе пути."""
-        if path.startswith('/movies'):
-            if GRADUAL_MIGRATION and random.randint(1, 100) <= MIGRATION_PERCENT:
+        if path.startswith('/api/movies'):
+            if GRADUAL_MIGRATION:
+                random_value = random.randint(1, 100)
+                logger.info(f"Migration check - Path: {path}, Migration Percent: {MIGRATION_PERCENT}, Random: {random_value}")
+
+                if random_value <= MIGRATION_PERCENT:
+                    logger.info(f"Routing to MOVIES_SERVICE_URL: {MOVIES_SERVICE_URL}")
+                    return MOVIES_SERVICE_URL
+                else:
+                    logger.info(f"Routing to MONOLITH_URL: {MONOLITH_URL}")
+                    return MONOLITH_URL
+            else:
+                logger.info(f"Gradual migration disabled, routing to MOVIES_SERVICE_URL: {MOVIES_SERVICE_URL}")
                 return MOVIES_SERVICE_URL
-            return MONOLITH_URL
         elif path.startswith('/events'):
+            logger.info(f"Routing events to EVENTS_SERVICE_URL: {EVENTS_SERVICE_URL}")
             return EVENTS_SERVICE_URL
         elif path.startswith('/api/users'):
+            logger.info(f"Routing users to MONOLITH_URL: {MONOLITH_URL}")
             return MONOLITH_URL
+
+        logger.info(f"Default routing to MONOLITH_URL: {MONOLITH_URL}")
         return MONOLITH_URL
 
     def _forward_request(self, method):
@@ -99,6 +113,8 @@ if __name__ == '__main__':
     logger.info(f"Monolith URL: {MONOLITH_URL}")
     logger.info(f"Movies Service URL: {MOVIES_SERVICE_URL}")
     logger.info(f"Events Service URL: {EVENTS_SERVICE_URL}")
+    logger.info(f"Gradual Migration: {GRADUAL_MIGRATION}")
+    logger.info(f"Migration Percent: {MIGRATION_PERCENT}%")
 
     server = HTTPServer(('0.0.0.0', PORT), ProxyHandler)
     server.serve_forever()
