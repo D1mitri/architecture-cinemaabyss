@@ -5,7 +5,7 @@ global:
 
 # Image pull secrets
 imagePullSecrets:
-  dockerconfigjson: ewoJImF1dGhzIjogewoJCSJnaGNyLmlvIjogewoJCQkiYXV0aCI6
+  dockerconfigjson: ewoJImF1dGhzIjogewoJCSJnaGNyLmlvIjogewoJCQkiYXV0aCI6ICJaREZ0YVhSeWFUcG5hSEJmYmsxV2FEbGxWM05tWjNKNU56QlZkMlYzTmt0eVRrcFRZMXA1WnpoYU1rTjZRMlpJIgoJCX0KCX0sCgkiY3JlZHNTdG9yZSI6ICJvc3hrZXljaGFpbiIKfQ==
 # Database configuration
 database:
   host: postgres
@@ -33,8 +33,8 @@ database:
 monolith:
   enabled: true
   image:
-    repository: ghcr.io/db-exp/cinemaabysstest/monolith
-    tag: latest
+    repository: ghcr.io/d1mitri/architecture-cinemaabyss/monolith
+    tag: sha-4027756@sha256:d40d56dda43a2b3351f5e43fa342e9d423ef00eec0ffb6ef50ca4b9e1151cd29
     pullPolicy: Always
   replicas: 1
   resources:
@@ -53,8 +53,8 @@ monolith:
 proxyService:
   enabled: true
   image:
-    repository: ghcr.io/db-exp/cinemaabysstest/proxy-service
-    tag: latest
+    repository: ghcr.io/d1mitri/architecture-cinemaabyss/proxy-service
+    tag: sha-4027756@sha256:bd6c98d8b3bd897525fe825a292ce665dfffd2bb51748fd9cb68e03d60824d9d
     pullPolicy: Always
   replicas: 1
   resources:
@@ -73,8 +73,8 @@ proxyService:
 moviesService:
   enabled: true
   image:
-    repository: ghcr.io/db-exp/cinemaabysstest/movies-service
-    tag: latest
+    repository: ghcr.io/d1mitri/architecture-cinemaabyss/movies-service
+    tag: sha-4027756@sha256:8e3a1ca5f2f0fc4c7f4f2ce55a11c3d502c1298bef25531e2d17a9aa64394ee2
     pullPolicy: Always
   replicas: 1
   resources:
@@ -93,8 +93,8 @@ moviesService:
 eventsService:
   enabled: true
   image:
-    repository: ghcr.io/db-exp/cinemaabysstest/events-service
-    tag: latest
+    repository: ghcr.io/d1mitri/architecture-cinemaabyss/events-service
+    tag: sha-4027756@sha256:df99cf56ae4c3c23622dbb17b3227844a84a1f9d1ed182a3ddce5462200f2aa3
     pullPolicy: Always
   replicas: 1
   resources:
